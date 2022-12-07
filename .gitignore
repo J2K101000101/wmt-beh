@@ -1,0 +1,6 @@
+*.csv
+*.zip
+pre/
+*.png
+prePost/
+.DS_Store

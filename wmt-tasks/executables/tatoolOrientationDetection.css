@@ -1,0 +1,10 @@
+#canvas {
+	
+}
+
+/** 
+ * IMPORTANT: Use the prefix "tatoolContinuous" for the Executable name in the Editor to avoid flickering due to different background color.
+ */
+body[class*='tatoolOrientationDetection'] {
+	background-color:rgb(128,128,128); 
+}
