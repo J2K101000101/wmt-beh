@@ -14,18 +14,10 @@ function [Capacity,Precision] = getParameters(File,outputFolder,model,type)
     capDir = [outputFolder,'/',capName,'.csv'];
     preDir = [outputFolder,'/',preName,'.csv'];
 
-datasets=datastruct(File,type);
-
-%create a hmodel
-%parameters = MemFit(datasets, model, 'UseHierarchical', true);% have warning; slow
-% hModel = Hierarchical(datasets, StandardMixtureModel());
-% parameters_h= MLE(datasets,hModel);
-% parameters = OrganizeHierarchicalParams(hModel, parameters_h);
+datasets=datastructing(File,type);
 
 %FitMultipleSubjects_MLE
 parameters = FitMultipleSubjects_MLE(datasets, model);
-% % FitMultipleSubjects_MAP (the same parameters as in MLE)
-% parameters = FitMultipleSubjects_MAP(datasets, model);
 g = parameters.paramsSubs(:,1);
 sd = parameters.paramsSubs(:,2);
 for i = 1: length(parameters.paramsSubs)
@@ -33,15 +25,6 @@ capacity(i) = (1-g(i))*setSize;
 precision(i) = inv(sd(i));
 rnames{i} = datasets{1, i}.subjectID;
 end
-% % MemFit (slow)
-% parameters= MemFit(datasets, model);
-% for i=1:length(parameters)
-% g(i) = parameters{1,i}.maxPosterior(1);
-% sd(i) = parameters{1,i}.maxPosterior(2);
-% capacity(i) = (1-g(i))*setSize;
-% precision(i) = inv(sd(i));
-% rnames{i} = datasets{1, i}.subjectID;
-% end
 Capacity = table(capacity','RowNames',rnames, 'VariableNames', {capName });
 writetable(Capacity, capDir,'WriteRowNames', true, 'WriteVariableNames', true) ;
 Precision =table(precision','RowNames',rnames, 'VariableNames', {preName });
