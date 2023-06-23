@@ -1398,6 +1398,139 @@ responses_density <- ggarrange(p1,p2,
     legend.title=element_blank(),  element_line(colour = 'black',size = 1),panel.background=element_blank(),axis.text = element_text(face="bold"),axis.title = element_text(face="bold"),text = element_text(size = 12))
 ggsave(paste(analysedResults,"Figure5.png",sep = '/'),width = 9,height = 4.5)
 
+# break into 4 panels
+df <- df2 %>% subset(time=='pre')
+p11 <- ggplot(df, aes(x=givenResponse, linetype = time, fill = time, color =time)) +
+  geom_histogram(aes(y=100*..density..,
+                     linetype=time,fill=time),alpha = 0.2, bins = 60,color = '#F7F5F2',
+                 #position = 'identity'
+                 position = position_stack(reverse = TRUE)
+  )+
+  scale_color_manual(labels = c("Pre-Test", "Post-Test"),values=c( "#3C3E8E","#CE0064"))+
+  scale_fill_manual(labels = c("Pre-Test", "Post-Test"),values=c(  "#3C3E8E","#CE0064"))+
+  scale_linetype_manual(labels = c("Pre-Test", "Post-Test"), values = c(2,1))+
+  geom_density(aes(y=100*..density..,color = time),alpha=0,fill = "white", size =1.5)+
+  scale_x_continuous(breaks=seq(0,360,45), limits=c(1,360))+
+  labs(x="Responses (degree)", y = "Density (%)")+
+  ggtitle("Experimental Group")+
+  guides(color=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),linetype=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),fill=guide_legend(title.position="top", title.hjust = 0.5,title = "Time"))+
+  theme(
+    legend.position = "top",
+    legend.background=element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(0.7, "cm"),
+    legend.title=element_text(face="bold"),
+    legend.text =element_text(face="bold"),
+    element_line(colour = 'black',size = 1),
+    panel.background=element_blank(),
+    axis.line.y.left = element_line(size = 1),
+    axis.line.x.bottom  = element_line(size = 1),
+    axis.text = element_text(face="bold"),
+    axis.title = element_text(face="bold"),
+    plot.title = element_text(hjust = 0.5,face="bold",size = 12),
+    text = element_text(size = 12))
+
+df <- df2 %>% subset(time=='post')
+p12 <- ggplot(df, aes(x=givenResponse, linetype = time, fill = time, color =time)) +
+  geom_histogram(aes(y=100*..density..,
+                     linetype=time,fill=time),alpha = 0.2, bins = 60,color = '#F7F5F2',
+                 #position = 'identity'
+                 position = position_stack(reverse = TRUE)
+  )+
+  scale_color_manual(labels = c( "Post-Test","Pre-Test"),values=c( "#CE0064","#3C3E8E"))+
+  scale_fill_manual(labels = c( "Post-Test","Pre-Test"),values=c( "#CE0064","#3C3E8E"))+
+  scale_linetype_manual(labels = c( "Post-Test","Pre-Test"), values = c(1,2))+
+  geom_density(aes(y=100*..density..,color = time),alpha=0,fill = "white", size =1.5)+
+  scale_x_continuous(breaks=seq(0,360,45), limits=c(1,360))+
+  labs(x="Responses (degree)", y = "Density (%)")+
+  ggtitle("Experimental Group")+
+  guides(color=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),linetype=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),fill=guide_legend(title.position="top", title.hjust = 0.5,title = "Time"))+
+  theme(
+    legend.position = "top",
+    legend.background=element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(0.7, "cm"),
+    legend.title=element_text(face="bold"),
+    legend.text =element_text(face="bold"),
+    element_line(colour = 'black',size = 1),
+    panel.background=element_blank(),
+    axis.line.y.left = element_line(size = 1),
+    axis.line.x.bottom  = element_line(size = 1),
+    axis.text = element_text(face="bold"),
+    axis.title = element_text(face="bold"),
+    plot.title = element_text(hjust = 0.5,face="bold",size = 12),
+    text = element_text(size = 12))
+
+df <- df3 %>% subset(time=='pre')
+p21 <- ggplot(df, aes(x=givenResponse, linetype = time, fill = time, color =time)) +
+  geom_histogram(aes(y=100*..density..,
+                     linetype=time,fill=time),alpha = 0.2, bins = 60,color = '#F7F5F2',
+                 #position = 'identity'
+                 position = position_stack(reverse = TRUE)
+  )+
+  scale_color_manual(labels = c("Pre-Test", "Post-Test"),values=c( "#3C3E8E","#CE0064"))+
+  scale_fill_manual(labels = c("Pre-Test", "Post-Test"),values=c(  "#3C3E8E","#CE0064"))+
+  scale_linetype_manual(labels = c("Pre-Test", "Post-Test"), values = c(2,1))+
+  geom_density(aes(y=100*..density..,color = time),alpha=0,fill = "white", size =1.5)+
+  scale_x_continuous(breaks=seq(0,360,45), limits=c(1,360))+
+  labs(x="Responses (degree)", y = "Density (%)")+
+  ggtitle("Active Control Group")+
+  guides(color=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),linetype=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),fill=guide_legend(title.position="top", title.hjust = 0.5,title = "Time"))+
+  theme(
+    legend.position = "top",
+    legend.background=element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(0.7, "cm"),
+    legend.title=element_text(face="bold"),
+    legend.text =element_text(face="bold"),
+    element_line(colour = 'black',size = 1),
+    panel.background=element_blank(),
+    axis.line.y.left = element_line(size = 1),
+    axis.line.x.bottom  = element_line(size = 1),
+    axis.text = element_text(face="bold"),
+    axis.title = element_text(face="bold"),
+    plot.title = element_text(hjust = 0.5,face="bold",size = 12),
+    text = element_text(size = 12))
+
+df <- df3 %>% subset(time=='post')
+p22 <- ggplot(df, aes(x=givenResponse, linetype = time, fill = time, color =time)) +
+  geom_histogram(aes(y=100*..density..,
+                     linetype=time,fill=time),alpha = 0.2, bins = 60,color = '#F7F5F2',
+                 #position = 'identity'
+                 position = position_stack(reverse = TRUE)
+  )+
+  scale_color_manual(labels = c( "Post-Test","Pre-Test"),values=c( "#CE0064","#3C3E8E"))+
+  scale_fill_manual(labels = c( "Post-Test","Pre-Test"),values=c( "#CE0064","#3C3E8E"))+
+  scale_linetype_manual(labels = c( "Post-Test","Pre-Test"), values = c(1,2))+
+  geom_density(aes(y=100*..density..,color = time),alpha=0,fill = "white", size =1.5)+
+  scale_x_continuous(breaks=seq(0,360,45), limits=c(1,360))+
+  labs(x="Responses (degree)", y = "Density (%)")+
+  ggtitle("Active Control Group")+
+  guides(color=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),linetype=guide_legend(title.position="top", title.hjust = 0.5,title="Time"),fill=guide_legend(title.position="top", title.hjust = 0.5,title = "Time"))+
+  theme(
+    legend.position = "top",
+    legend.background=element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(0.7, "cm"),
+    legend.title=element_text(face="bold"),
+    legend.text =element_text(face="bold"),
+    element_line(colour = 'black',size = 1),
+    panel.background=element_blank(),
+    axis.line.y.left = element_line(size = 1),
+    axis.line.x.bottom  = element_line(size = 1),
+    axis.text = element_text(face="bold"),
+    axis.title = element_text(face="bold"),
+    plot.title = element_text(hjust = 0.5,face="bold",size = 12),
+    text = element_text(size = 12))
+
+responses_density <- ggarrange(p21,p11,p22,p12,
+                               ncol = 2, nrow = 2, 
+                               common.legend = TRUE, legend= 'none')+
+  theme(
+    legend.background=element_blank(),
+    legend.key = element_blank(),
+    legend.title=element_blank(),  element_line(colour = 'black',size = 1),panel.background=element_blank(),axis.text = element_text(face="bold"),axis.title = element_text(face="bold"),text = element_text(size = 12))
+ggsave(paste(analysedResults,"Figure5_sep.png",sep = '/'),width = 9,height = 4.5)
 
 
 cardinalBin <- function(df){
